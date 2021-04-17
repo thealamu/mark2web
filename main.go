@@ -31,14 +31,34 @@ func main() {
 	}
 
 	partData, err := createMultipart(mdBytes)
-	err = do(http.DefaultClient, partData)
 	if err != nil {
 		log.Fatal(err)
 	}
+	url, err := getURLForMarkdown(http.DefaultClient, partData)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(url)
 }
 
-// do makes a request to the server using the client
-func do(client *http.Client, mPart *mPartData) error {
+// getURLForMarkdown returns a URL for the markdown
+func getURLForMarkdown(client *http.Client, mPart *mPartData) (string, error) {
+	req, err := http.NewRequest(http.MethodPost, "http://localhost:8080", mPart.source)
+	if err != nil {
+		return "", err
+	}
+	req.Header.Set("Content-Type", mPart.contentType)
+	// make the request
+	resp, err := client.Do(req)
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+	urlBytes, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return "", err
+	}
+	return string(urlBytes), nil
 }
 
 func createMultipart(filedata []byte) (*mPartData, error) {
