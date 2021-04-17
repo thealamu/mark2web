@@ -61,7 +61,13 @@ func getURLForMarkdown(client *http.Client, mPart *mPartData) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return string(urlBytes), nil
+	return formatURL(string(urlBytes)), nil
+}
+
+// formatURL appends the URL path to the serverURL
+func formatURL(url string) string {
+	id := url[strings.LastIndex(url, "/")+1:]
+	return fmt.Sprintf("%s/%s", serverURL, id)
 }
 
 func createMultipart(filedata []byte) (*mPartData, error) {
