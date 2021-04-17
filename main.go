@@ -22,6 +22,7 @@ func main() {
 	if len(os.Args) < 2 {
 		// No argument specified
 		printHelp()
+		return
 	}
 
 	filename := os.Args[1]
