@@ -37,10 +37,12 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	url, err := getURLForMarkdown(http.DefaultClient, partData)
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	fmt.Println(url)
 }
 
