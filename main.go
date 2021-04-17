@@ -12,6 +12,8 @@ import (
 	"strings"
 )
 
+const serverURL = "http://localhost:8080"
+
 // mPart holds multipart data
 type mPartData struct {
 	source      io.Reader
@@ -44,7 +46,7 @@ func main() {
 
 // getURLForMarkdown returns a URL for the markdown
 func getURLForMarkdown(client *http.Client, mPart *mPartData) (string, error) {
-	req, err := http.NewRequest(http.MethodPost, "http://localhost:8080", mPart.source)
+	req, err := http.NewRequest(http.MethodPost, serverURL, mPart.source)
 	if err != nil {
 		return "", err
 	}
