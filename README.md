@@ -13,6 +13,8 @@ https://mark2web.test/aa32d8f230ef9d44c3a7acb55b572c8599502701
 
 ## Install
 
+You can download the [latest release binaries](https://github.com/thealamu/mark2web/releases).
+
 ### Go
 
 ```bash
