@@ -12,7 +12,7 @@ import (
 	"strings"
 )
 
-const serverURL = "http://localhost:8080"
+const serverURL = "https://mark2web-service.herokuapp.com/"
 
 // mPart holds multipart data
 type mPartData struct {
